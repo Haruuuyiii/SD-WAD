@@ -1,0 +1,253 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+  list-style: none;
+  color: white;
+
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+:root {
+  /* Font Family */
+  --nav-bar-font: "Space Grotesk";
+
+  /* Colors */
+  --header-color: #0E21A0;
+  --background-color: #FFF;
+  --text-color: #FFF;
+  --color1: #4D2FB2;
+  --color2: #B153D7;
+  --color3: #F375C2;
+}
+
+section {
+  min-height: 100vh;
+  background-color: #4D2FB2;
+}
+
+/* Header Styling */
+header {
+  position: fixed;
+  background-color: #0E21A0;
+  width: 100%;
+  padding: 2rem;
+  border-bottom: 2px solid white;
+}
+
+header .navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+header .navbar .main-menu {
+  display: flex;
+  align-items: center;
+  margin-left: 5rem;
+}
+
+header .navbar .main-menu .menu-text {
+  font-family: var(--nav-bar-font);
+  font-size: 3rem;
+}
+
+header .navbar .main-menu .logo {
+  height: 5rem;
+}
+
+header .navbar .nav-menu {
+  display: flex;
+  gap: 2rem;
+  margin-right: 5rem;
+}
+
+header .navbar .nav-menu .nav-items .nav-link {
+  font-family: var(--nav-bar-font);
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+header .navbar .nav-middle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+header .navbar .nav-middle input {
+  width: 35rem;
+  padding: 1rem 2rem;
+  font-size: 2rem;
+  border: none;
+  border-radius: 2rem;
+  color: black;
+}
+
+header .navbar .nav-middle i {
+  font-size: 2.8rem;
+  cursor: pointer;
+}
+
+
+header .navbar .nav-menu .nav-items #sign-up-btn {
+  background: var(--color3);
+  padding: 1rem 2rem;
+  border-radius: 15px;
+  transition: 0.3s ease;
+}
+
+header .navbar .nav-menu .nav-items #sign-up-btn:hover {
+  background-color:var(--color2);
+}
+
+/* Hero Styling */
+#hero {
+  min-height: 100vh;
+  background-image: url(/images/hero-section.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+section h1 {
+  font-family: "Onest", "arial";
+  font-size: 10rem;
+}
+
+/* Login Popup Styling */
+
+
+.login-popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.8);
+  background-color: transparent;
+  border: 3px solid white;
+  backdrop-filter: blur(10px);
+  width: 50rem;
+  height: 60rem;
+  padding: 3rem;
+  border-radius: 8px;
+  display: none;
+  z-index: 11;        
+}
+
+
+.login-popup h2 {
+  margin-bottom: 2rem;
+  color: white;
+  display: flex;
+  justify-content: center;
+  font-family: "Onest";
+  font-size: 5rem;
+  letter-spacing: -2px;
+}
+
+.login-popup form {
+  margin-top: 5rem;
+}
+
+.login-popup form label {
+  font-family: "Onest";
+  font-size: 3rem;
+  font-weight: bold;
+}
+
+.login-popup input {
+  width: 100%;
+  padding: 1rem;
+  margin: 1rem 0;
+  font-size: 20px;
+}
+
+.login-popup .submit {
+  width: 100%;
+  padding: 1rem;
+  background-color: var(--color1);
+  font-size: 3rem;
+  border-style: none;
+  cursor: pointer;
+  margin-top: 2rem;
+  font-family: "Onest";
+  font-weight: bold;
+  transition: 0.3s ease;
+}
+
+.login-popup .submit:hover {
+  background-color: #3d1bad;
+}
+
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 50px;
+  font-weight: bold;
+  cursor: pointer;
+  color: white;
+}
+
+body.modal-open {
+  overflow: hidden;
+}
+
+/* Second Section Styling */
+#second-section {
+  background: linear-gradient(to right, #15258a, #4D2FB2, #B153D7, #c45599);
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  max-width: 100%;
+  max-height: 80%;
+}
+
+.grid-content {
+  background: rgb(255, 85, 23);
+  height: 60rem;
+  width: 50rem;
+  border-radius: 5px;
+  margin: 10rem auto;
+  border: 7px solid rgb(21, 21, 80);
+}
+
+.content-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+.content-container .ticket-btn {
+  width: 24rem;
+  height: 6rem;
+  background: var(--color1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.content-container .ticket-btn .ticket {
+  font-family: "Onest";
+  font-size: 2.5rem;
+}
+
+.event-img {
+  height: 100%;
+  width: 100%;
+}

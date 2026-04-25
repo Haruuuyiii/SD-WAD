@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign Up</title>
+  <link rel="stylesheet" href="/page2/page2style.css">
+  <!-- Space Grotesk Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100..900;1,100..900&family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
+  <!-- Onest Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100..900;1,100..900&family=Onest:wght@100..900&family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+  <!-- Header Section -->
+  <header>
+    <nav class="navbar">
+      <a href="#" class="main-menu">
+        <img class="logo" src="/images/logo.png" alt="logo">
+        <h2 class="menu-text">CozMos</h2>
+      </a>
+    </nav>
+  </header>
+  
+  <!-- Sign up Section -->
+  <section>
+    <div class="container-signup">
+      <h1>Welcome to Cozmoz!</h1>
+      <div class="signup-popup" id="signupPopup">
+        <h2>Create an Account</h2>
+        <hr>
+
+        <!-- ✅ form now has submit event handled by page2script.js -->
+        <form>
+          <label>Username</label>
+          <input type="text" placeholder="Enter your username">
+
+          <label>Password</label>
+          <input type="password" placeholder="Enter your password">
+
+          <!-- ✅ changed to type="submit" so the form fires submit event -->
+          <button type="submit" class="button">Sign Up</button>
+        </form>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ✅ Connect to the gateway via page2script.js -->
+  <script src="/page2/page2script.js"></script>
+</body>
+</html>
