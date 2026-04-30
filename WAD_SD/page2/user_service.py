@@ -24,10 +24,10 @@ def get_all_profiles():
 
 @app.route("/profile/<username>", methods=["GET"])
 def get_profile(username):
-    user = profiles.get(username)
-    if not user:
+    if user := profiles.get(username):
+        return jsonify({"username": username, **user})
+    else:
         return jsonify({"error": f"User '{username}' not found"}), 404
-    return jsonify({"username": username, **user})
 
 @app.route("/profile/<username>", methods=["PUT"])
 def update_profile(username):

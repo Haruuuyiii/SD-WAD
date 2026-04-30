@@ -58,8 +58,7 @@ class MessageBus:
         """
         q = self.get_or_create_topic(topic)
         try:
-            event = q.get(timeout=timeout)
-            return event
+            return q.get(timeout=timeout)
         except queue.Empty:
             return None  # No messages right now, that's okay!
 

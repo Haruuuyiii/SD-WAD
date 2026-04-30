@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Login - CozMoz</title>
+  <link rel="stylesheet" href="./admin-login-style.css">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="admin-login-container">
+    <!-- Left Side - Branding -->
+    <div class="login-brand">
+      <div class="brand-content">
+        <h1>CozMoz Admin</h1>
+        <p>Event Management & Control System</p>
+        <div class="brand-features">
+          <div class="feature">
+            <i class="fas fa-chart-line"></i>
+            <span>Real-time Analytics</span>
+          </div>
+          <div class="feature">
+            <i class="fas fa-users"></i>
+            <span>User Management</span>
+          </div>
+          <div class="feature">
+            <i class="fas fa-calendar"></i>
+            <span>Event Control</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Side - Login Form -->
+    <div class="login-form-container">
+      <div class="login-box">
+        <div class="login-header">
+          <h2>Admin Login</h2>
+          <p>Enter your credentials to access the admin panel</p>
+        </div>
+
+        <form id="adminLoginForm" class="login-form">
+          <div class="form-group">
+            <label for="username">Username</label>
+            <div class="input-wrapper">
+              <i class="fas fa-user"></i>
+              <input 
+                type="text" 
+                id="username" 
+                name="username" 
+                placeholder="Enter your username" 
+                required
+              >
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="password">Password</label>
+            <div class="input-wrapper">
+              <i class="fas fa-lock"></i>
+              <input 
+                type="password" 
+                id="password" 
+                name="password" 
+                placeholder="Enter your password" 
+                required
+              >
+              <i class="fas fa-eye toggle-password" onclick="togglePassword()"></i>
+            </div>
+          </div>
+
+          <div class="remember-section">
+            <label class="remember-me">
+              <input type="checkbox" name="remember">
+              <span>Remember me</span>
+            </label>
+            <a href="#" class="forgot-password">Forgot Password?</a>
+          </div>
+
+          <button type="submit" class="login-btn">
+            <span>Sign In</span>
+            <i class="fas fa-arrow-right"></i>
+          </button>
+
+          <div id="loginMessage" class="login-message"></div>
+        </form>
+
+        <div class="login-footer">
+          <p>Not an admin? <a href="./index.html">Back to Home</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="./admin-login-script.js"></script>
+</body>
+</html>

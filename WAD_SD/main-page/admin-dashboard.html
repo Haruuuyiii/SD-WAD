@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard - CozMoz</title>
+  <link rel="stylesheet" href="./admin-dashboard-style.css">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <!-- Chart.js for charts -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="admin-dashboard">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="logo">
+          <i class="fas fa-crown"></i>
+          <span>CozMoz Admin</span>
+        </div>
+      </div>
+
+      <nav class="sidebar-nav">
+        <ul class="nav-list">
+          <li class="nav-item active">
+            <a href="#dashboard" class="nav-link" data-page="dashboard">
+              <i class="fas fa-chart-line"></i>
+              <span>Dashboard</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#events" class="nav-link" data-page="events">
+              <i class="fas fa-calendar"></i>
+              <span>Events</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#registrations" class="nav-link" data-page="registrations">
+              <i class="fas fa-clipboard-list"></i>
+              <span>Registrations</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#attendance" class="nav-link" data-page="attendance">
+              <i class="fas fa-check-circle"></i>
+              <span>Attendance</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#analytics" class="nav-link" data-page="analytics">
+              <i class="fas fa-chart-bar"></i>
+              <span>Analytics</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="#announcements" class="nav-link" data-page="announcements">
+              <i class="fas fa-bullhorn"></i>
+              <span>Announcements</span>
+            </a>
+          </li>
+        </ul>
+      </nav>
+
+      <div class="sidebar-footer">
+        <div class="admin-info">
+          <div class="admin-avatar">
+            <i class="fas fa-user-shield"></i>
+          </div>
+          <div class="admin-details">
+            <p class="admin-name" id="adminName">Admin User</p>
+            <p class="admin-role">Administrator</p>
+          </div>
+        </div>
+        <button class="logout-btn" onclick="logout()">
+          <i class="fas fa-sign-out-alt"></i>
+          <span>Logout</span>
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <!-- Top Bar -->
+      <div class="topbar">
+        <div class="topbar-left">
+          <h1 id="pageTitle">Dashboard</h1>
+          <p id="pageSubtitle">Welcome back to CozMoz Admin Panel</p>
+        </div>
+        <div class="topbar-right">
+          <div class="search-box">
+            <input type="text" placeholder="Search...">
+            <i class="fas fa-search"></i>
+          </div>
+          <div class="topbar-icons">
+            <div class="icon-btn">
+              <i class="fas fa-bell"></i>
+              <span class="badge">3</span>
+            </div>
+            <div class="icon-btn">
+              <i class="fas fa-cog"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Page Content -->
+      <div class="page-content">
+        <!-- Dashboard Page -->
+        <div id="dashboard-page" class="page active">
+          <!-- Statistics Cards -->
+          <div class="stats-grid">
+            <div class="stat-card total-events">
+              <div class="stat-icon">
+                <i class="fas fa-calendar-alt"></i>
+              </div>
+              <div class="stat-content">
+                <p class="stat-label">Total Events</p>
+                <p class="stat-value" id="totalEvents">6</p>
+                <p class="stat-change positive">
+                  <i class="fas fa-arrow-up"></i>
+                  <span>2 this month</span>
+                </p>
+              </div>
+            </div>
+
+            <div class="stat-card total-registrations">
+              <div class="stat-icon">
+                <i class="fas fa-users"></i>
+              </div>
+              <div class="stat-content">
+                <p class="stat-label">Total Registrations</p>
+                <p class="stat-value" id="totalRegistrations">13</p>
+                <p class="stat-change positive">
+                  <i class="fas fa-arrow-up"></i>
+                  <span>5 this week</span>
+                </p>
+              </div>
+            </div>
+
+            <div class="stat-card active-events">
+              <div class="stat-icon">
+                <i class="fas fa-play-circle"></i>
+              </div>
+              <div class="stat-content">
+                <p class="stat-label">Active Events</p>
+                <p class="stat-value" id="activeEvents">6</p>
+                <p class="stat-change neutral">
+                  <i class="fas fa-info-circle"></i>
+                  <span>Ongoing now</span>
+                </p>
+              </div>
+            </div>
+
+            <div class="stat-card attended">
+              <div class="stat-icon">
+                <i class="fas fa-ticket-alt"></i>
+              </div>
+              <div class="stat-content">
+                <p class="stat-label">Tickets Bought/Checked</p>
+                <p class="stat-value" id="ticketsBought">4</p>
+                <p class="stat-change">
+                  <i class="fas fa-info-circle"></i>
+                  <span>61% attendance rate</span>
+                </p>
+              </div>
+            </div>
+
+            <div class="stat-card logged-in-users">
+              <div class="stat-icon">
+                <i class="fas fa-user-check"></i>
+              </div>
+              <div class="stat-content">
+                <p class="stat-label">Logged In Users</p>
+                <p class="stat-value" id="loggedInUsers">8</p>
+                <p class="stat-change positive">
+                  <i class="fas fa-arrow-up"></i>
+                  <span>Online now</span>
+                </p>
+              </div>
+            </div>
+
+            <div class="stat-card total-users">
+              <div class="stat-icon">
+                <i class="fas fa-globe"></i>
+              </div>
+              <div class="stat-content">
+                <p class="stat-label">Total Users</p>
+                <p class="stat-value" id="totalUsers">24</p>
+                <p class="stat-change positive">
+                  <i class="fas fa-arrow-up"></i>
+                  <span>3 new today</span>
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Charts Section -->
+          <div class="charts-section">
+            <div class="chart-container">
+              <div class="chart-header">
+                <h3>Registrations per Event</h3>
+                <div class="chart-controls">
+                  <select id="chartPeriod">
+                    <option value="week">This Week</option>
+                    <option value="month" selected>This Month</option>
+                    <option value="year">This Year</option>
+                  </select>
+                </div>
+              </div>
+              <div class="chart-body">
+                <canvas id="registrationsChart"></canvas>
+              </div>
+            </div>
+
+            <div class="chart-container">
+              <div class="chart-header">
+                <h3>User Distribution</h3>
+              </div>
+              <div class="chart-body">
+                <canvas id="userDistributionChart"></canvas>
+              </div>
+            </div>
+          </div>
+
+          <!-- Recent Activity -->
+          <div class="recent-section">
+            <div class="section-header">
+              <h3>Recent Registrations</h3>
+              <a href="#registrations" class="view-all">View All</a>
+            </div>
+            <div class="recent-list">
+              <div class="recent-item">
+                <div class="recent-avatar">RP</div>
+                <div class="recent-info">
+                  <p class="recent-name">Rommel P. Jiang Jr.</p>
+                  <p class="recent-event">TechTalk 2024</p>
+                </div>
+                <p class="recent-time">Registered 1 hour ago</p>
+                <span class="badge verified"><i class="fas fa-check"></i> Verified</span>
+              </div>
+              <div class="recent-item">
+                <div class="recent-avatar">HY</div>
+                <div class="recent-info">
+                  <p class="recent-name">HONEYYYY</p>
+                  <p class="recent-event">Web Dev Workshop</p>
+                </div>
+                <p class="recent-time">Registered 45 minutes ago</p>
+                <span class="badge pending"><i class="fas fa-clock"></i> Pending</span>
+              </div>
+              <div class="recent-item">
+                <div class="recent-avatar">RL</div>
+                <div class="recent-info">
+                  <p class="recent-name">RONNEL</p>
+                  <p class="recent-event">Design Bootcamp</p>
+                </div>
+                <p class="recent-time">Registered 2 days ago</p>
+                <span class="badge verified"><i class="fas fa-check"></i> Verified</span>
+              </div>
+              <div class="recent-item">
+                <div class="recent-avatar">DR</div>
+                <div class="recent-info">
+                  <p class="recent-name">DREN</p>
+                  <p class="recent-event">AI Summit</p>
+                </div>
+                <p class="recent-time">Registered 1 day ago</p>
+                <span class="badge verified"><i class="fas fa-check"></i> Verified</span>
+              </div>
+              <div class="recent-item">
+                <div class="recent-avatar">KX</div>
+                <div class="recent-info">
+                  <p class="recent-name">XYZA</p>
+                  <p class="recent-event">Mobile Dev Conference</p>
+                </div>
+                <p class="recent-time">Registered 1 day ago</p>
+                <span class="badge verified"><i class="fas fa-check"></i> Verified</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Other Pages (Coming Soon) -->
+        <div id="events-page" class="page">
+          <div class="coming-soon">
+            <i class="fas fa-calendar"></i>
+            <h2>Events Management</h2>
+            <p>Coming Soon</p>
+          </div>
+        </div>
+
+        <div id="registrations-page" class="page">
+          <div class="coming-soon">
+            <i class="fas fa-clipboard-list"></i>
+            <h2>Registrations</h2>
+            <p>Coming Soon</p>
+          </div>
+        </div>
+
+        <div id="attendance-page" class="page">
+          <div class="coming-soon">
+            <i class="fas fa-check-circle"></i>
+            <h2>Attendance</h2>
+            <p>Coming Soon</p>
+          </div>
+        </div>
+
+        <div id="analytics-page" class="page">
+          <div class="coming-soon">
+            <i class="fas fa-chart-bar"></i>
+            <h2>Analytics</h2>
+            <p>Coming Soon</p>
+          </div>
+        </div>
+
+        <div id="announcements-page" class="page">
+          <div class="coming-soon">
+            <i class="fas fa-bullhorn"></i>
+            <h2>Announcements</h2>
+            <p>Coming Soon</p>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script src="./admin-dashboard-script.js"></script>
+</body>
+</html>
