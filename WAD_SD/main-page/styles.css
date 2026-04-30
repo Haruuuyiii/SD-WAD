@@ -241,6 +241,7 @@ body.modal-open {
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 }
 
 .content-container .ticket-btn .ticket {
