@@ -5,7 +5,6 @@
   text-decoration: none;
   list-style: none;
   color: white;
-
 }
 
 img {
@@ -22,23 +21,23 @@ html {
   --nav-bar-font: "Space Grotesk";
 
   /* Colors */
-  --header-color: #0E21A0;
-  --background-color: #FFF;
-  --text-color: #FFF;
-  --color1: #4D2FB2;
-  --color2: #B153D7;
-  --color3: #F375C2;
+  --header-color: #0e21a0;
+  --background-color: #fff;
+  --text-color: #fff;
+  --color1: #4d2fb2;
+  --color2: #b153d7;
+  --color3: #f375c2;
 }
 
 section {
   min-height: 100vh;
-  background-color: #4D2FB2;
+  background-color: #4d2fb2;
 }
 
 /* Header Styling */
 header {
   position: fixed;
-  background-color: #0E21A0;
+  background-color: #0e21a0;
   width: 100%;
   padding: 2rem;
   border-bottom: 2px solid white;
@@ -98,7 +97,6 @@ header .navbar .nav-middle i {
   cursor: pointer;
 }
 
-
 header .navbar .nav-menu .nav-items #sign-up-btn {
   background: var(--color3);
   padding: 1rem 2rem;
@@ -107,7 +105,7 @@ header .navbar .nav-menu .nav-items #sign-up-btn {
 }
 
 header .navbar .nav-menu .nav-items #sign-up-btn:hover {
-  background-color:var(--color2);
+  background-color: var(--color2);
 }
 
 /* Hero Styling */
@@ -129,7 +127,6 @@ section h1 {
 
 /* Login Popup Styling */
 
-
 .login-popup {
   position: fixed;
   top: 50%;
@@ -143,9 +140,8 @@ section h1 {
   padding: 3rem;
   border-radius: 8px;
   display: none;
-  z-index: 11;        
+  z-index: 11;
 }
-
 
 .login-popup h2 {
   margin-bottom: 2rem;
@@ -172,7 +168,7 @@ section h1 {
   padding: 1rem;
   margin: 1rem 0;
   font-size: 20px;
-  color:black;
+  color: black;
 }
 
 .login-popup .submit {
@@ -208,7 +204,7 @@ body.modal-open {
 
 /* Second Section Styling */
 #second-section {
-  background: linear-gradient(to right, #15258a, #4D2FB2, #B153D7, #c45599);
+  background: linear-gradient(to right, #15258a, #4d2fb2, #b153d7, #c45599);
 }
 
 .grid-container {
@@ -233,7 +229,6 @@ body.modal-open {
   align-items: center;
 }
 
-
 .content-container .ticket-btn {
   width: 24rem;
   height: 6rem;
@@ -252,4 +247,126 @@ body.modal-open {
 .event-img {
   height: 100%;
   width: 100%;
+}
+
+/* Announcements Section Styling */
+#announcements-section {
+  background: #eafff3;
+  padding: 3rem 0 2rem 0;
+  min-height: unset;
+}
+#announcements-section .section-title {
+  color: #0e21a0;
+  font-family: "Space Grotesk", Arial, sans-serif;
+  font-size: 3.2rem;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+.announcements-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  max-width: 900px;
+  margin: 0 auto;
+}
+.announcement-card {
+  display: flex;
+  align-items: flex-start;
+  background: #eafff3;
+  border-radius: 18px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+  padding: 2rem 2.5rem;
+  gap: 2rem;
+  border: 1.5px solid #b6f5d8;
+}
+.announcement-icon {
+  font-size: 2.8rem;
+  color: #0e21a0;
+  margin-top: 0.2em;
+}
+.announcement-content strong {
+  color: #0e21a0;
+  font-size: 2rem;
+  font-family: "Space Grotesk", Arial, sans-serif;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+.announcement-content div {
+  color: #222;
+  font-size: 1.7rem;
+  font-family: "Onest", Arial, sans-serif;
+}
+
+/* Footer Section Styling */
+#footer-section {
+  background: #0e21a0;
+  color: #fff;
+  padding: 3rem 0 2rem 0;
+  margin-top: 0;
+}
+.footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+.footer-brand {
+  flex: 1 1 200px;
+}
+.footer-brand .footer-logo {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+.footer-brand .footer-logo img {
+  height: 3rem;
+}
+.footer-brand .footer-title {
+  font-family: "Space Grotesk", Arial, sans-serif;
+  font-size: 2rem;
+  font-weight: bold;
+}
+.footer-desc {
+  color: #eaf0ff;
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+}
+.footer-links,
+.footer-contact {
+  flex: 1 1 180px;
+}
+.footer-links h4,
+.footer-contact h4 {
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
+  color: #fff;
+}
+.footer-links ul {
+  padding-left: 0;
+}
+.footer-links li {
+  margin-bottom: 0.7rem;
+}
+.footer-links a {
+  color: #eaf0ff;
+  text-decoration: none;
+  font-size: 1.1rem;
+  transition: color 0.2s;
+}
+.footer-links a:hover {
+  color: #b153d7;
+}
+.footer-contact p {
+  color: #eaf0ff;
+  font-size: 1.1rem;
+}
+.footer-copyright {
+  text-align: center;
+  color: #eaf0ff;
+  font-size: 1rem;
+  margin-top: 2rem;
 }

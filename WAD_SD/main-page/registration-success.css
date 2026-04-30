@@ -1,0 +1,83 @@
+/* Registration Success Page Styling */
+#success-section {
+  background: #f7faff;
+  padding: 4rem 0 6rem 0;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+.success-card {
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  width: 420px;
+  padding: 3.5rem 3rem 3rem 3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.2rem;
+}
+.success-check {
+  color: #0e21a0;
+  font-size: 4.5rem;
+  margin-bottom: 0.5rem;
+}
+.success-card h2 {
+  color: #0e21a0;
+  font-size: 2.2rem;
+  margin-bottom: 0.5rem;
+  text-align: center;
+}
+.success-desc {
+  color: #222;
+  font-size: 1.2rem;
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+.success-details {
+  color: #222;
+  font-size: 1.1rem;
+  margin-bottom: 1.5rem;
+  width: 100%;
+}
+.success-details > div {
+  margin-bottom: 0.3rem;
+}
+.success-note {
+  color: #0e21a0;
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+  text-align: center;
+}
+.success-code-box {
+  background: #eaf0ff;
+  color: #0e21a0;
+  border-radius: 8px;
+  padding: 1.1rem 0;
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: bold;
+  width: 100%;
+  margin-bottom: 1.5rem;
+}
+.success-actions {
+  display: flex;
+  gap: 1.5rem;
+  width: 100%;
+  justify-content: center;
+}
+.success-btn {
+  background: #0e21a0;
+  color: #fff;
+  border-radius: 8px;
+  padding: 0.7rem 1.5rem;
+  text-align: center;
+  font-size: 1.1rem;
+  font-weight: bold;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+.success-btn:hover {
+  background: #b153d7;
+}

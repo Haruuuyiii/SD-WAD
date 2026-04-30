@@ -1,0 +1,111 @@
+/* Events Page Styling */
+#events-section {
+  background: #f7faff;
+  padding: 4rem 0 6rem 0;
+  min-height: 100vh;
+}
+.events-title {
+  color: #0e21a0;
+  font-family: "Space Grotesk", Arial, sans-serif;
+  font-size: 3.2rem;
+  margin-bottom: 0.5rem;
+  text-align: center;
+}
+.events-desc {
+  color: #222;
+  font-size: 1.7rem;
+  text-align: center;
+  margin-bottom: 3rem;
+}
+.events-list {
+  display: flex;
+  gap: 2.5rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.event-card {
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  width: 320px;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+.event-img {
+  height: 140px;
+  background-size: cover;
+  background-position: center;
+}
+.event-img-1 {
+  background-image: url("../images/main bg.avif");
+}
+.event-img-2 {
+  background-image: url("../images/campus clash.jpg");
+}
+.event-img-3 {
+  background-image: url("https://placekitten.com/400/200");
+}
+.event-status {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: #0e21a0;
+  color: #fff;
+  font-size: 1.1rem;
+  padding: 0.4rem 1.2rem;
+  border-radius: 12px;
+  font-weight: bold;
+}
+.event-info {
+  padding: 1.5rem 1.5rem 2rem 1.5rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+.event-info strong {
+  color: #0e21a0;
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+.event-meta {
+  color: #444;
+  font-size: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  margin-bottom: 1rem;
+}
+.event-btn {
+  background: #0e21a0;
+  color: #fff;
+  border-radius: 8px;
+  padding: 0.7rem 0;
+  text-align: center;
+  font-size: 1.1rem;
+  font-weight: bold;
+  text-decoration: none;
+  margin-top: auto;
+  transition: background 0.2s;
+  display: block;
+}
+.event-btn:hover {
+  background: #b153d7;
+}
+.view-all-btn {
+  background: #eaf0ff;
+  color: #0e21a0;
+  border-radius: 8px;
+  padding: 0.7rem 2.5rem;
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+.view-all-btn:hover {
+  background: #b153d7;
+  color: #fff;
+}

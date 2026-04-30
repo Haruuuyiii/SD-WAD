@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Register for Event - CozMoz</title>
+    <link rel="stylesheet" href="../main-page/styles.css" />
+    <link rel="stylesheet" href="./register.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100..900;1,100..900&family=Space+Grotesk:wght@300..700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+    <header>
+      <nav class="navbar">
+        <a href="../main-page/index.html" class="main-menu">
+          <img class="logo" src="../images/logo.png" alt="logo" />
+          <h2 class="menu-text">CozMoz</h2>
+        </a>
+        <div class="nav-middle"></div>
+        <ul class="nav-menu">
+          <li class="nav-items">
+            <a href="../main-page/index.html" class="nav-link">HOME</a>
+          </li>
+          <li class="nav-items">
+            <a href="events.html" class="nav-link">EVENTS</a>
+          </li>
+          <li class="nav-items"><a href="#" class="nav-link">ADMIN</a></li>
+        </ul>
+      </nav>
+    </header>
+    <main style="padding-top: 10rem">
+      <section id="register-section">
+        <form class="register-form" action="registration-success.html">
+          <h2>Register for Event</h2>
+          <div class="register-event-title">TEST TESTING — April 22, 2026</div>
+          <div class="form-group">
+            <label>Full Name <span>*</span></label>
+            <input type="text" required placeholder="e.g. Juan Dela Cruz" />
+          </div>
+          <div class="form-group">
+            <label
+              >Email Address <span style="color: #aaa">(optional)</span></label
+            >
+            <input type="email" placeholder="e.g. juan@email.com (optional)" />
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Department <span>*</span></label>
+              <select required>
+                <option value="">Select your department</option>
+                <option>COENG</option>
+                <option>CAS</option>
+                <option>CBA</option>
+                <option>CTE</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Year Level <span>*</span></label>
+              <select required>
+                <option value="">Select year level</option>
+                <option>1st Year</option>
+                <option>2nd Year</option>
+                <option>3rd Year</option>
+                <option>4th Year</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Section</label>
+              <input type="text" placeholder="e.g. A, B, C" />
+            </div>
+            <div class="form-group">
+              <label
+                >Contact Number
+                <span style="color: #aaa">(optional)</span></label
+              >
+              <input type="text" placeholder="e.g. 09123456789 (optional)" />
+            </div>
+          </div>
+          <button type="submit" class="register-submit">
+            Submit Registration
+          </button>
+        </form>
+      </section>
+    </main>
+  </body>
+</html>
