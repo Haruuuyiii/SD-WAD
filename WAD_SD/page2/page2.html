@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sign Up</title>
-  <link rel="stylesheet" href="/WAD_SD/page2/page2style.css">
+  <link rel="stylesheet" href="./page2style.css">
   <!-- Space Grotesk Font -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -21,7 +21,7 @@
   <header>
     <nav class="navbar">
       <a href="#" class="main-menu">
-        <img class="logo" src="/WAD_SD/images/logo.png" alt="logo">
+        <img class="logo" src="../images/logo.png" alt="logo">
         <h2 class="menu-text">CozMos</h2>
       </a>
     </nav>
@@ -36,15 +36,15 @@
         <hr>
 
         <!-- ✅ form now has submit event handled by page2script.js -->
-        <form>
+        <form method="POST" action="sign_up.php">
           <label>Username</label>
-          <input type="text" placeholder="Enter your username">
+          <input type="text" name="username" placeholder="Enter your username" required>
 
           <label>Password</label>
-          <input type="password" placeholder="Enter your password">
+          <input type="password" name="password" placeholder="Enter your password" required>
 
           <!-- ✅ changed to type="submit" so the form fires submit event -->
-          <button type="submit" class="button">Sign Up</button>
+          <button type="submit" name="register" value="1" class="button">Sign Up</button>
         </form>
 
       </div>
@@ -52,6 +52,6 @@
   </section>
 
   <!-- ✅ Connect to the gateway via page2script.js -->
-  <script src="/page2/page2script.js"></script>
+  <script src="./page2script.js"></script>
 </body>
 </html>

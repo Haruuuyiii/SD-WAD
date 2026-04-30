@@ -113,7 +113,7 @@ header .navbar .nav-menu .nav-items #sign-up-btn:hover {
 /* Hero Styling */
 #hero {
   min-height: 100vh;
-  background-image: url(/WAD_SD/images/hero-section.jpg);
+  background-image: url(../images/hero-section.jpg);
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;

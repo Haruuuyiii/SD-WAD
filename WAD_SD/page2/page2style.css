@@ -32,7 +32,7 @@ html {
 
 section {
   min-height: 100vh;
-  background-image: url(/WAD_SD/images/sign\ up\ bg.jpg);
+  background-image: url(../images/sign\ up\ bg.jpg);
 }
 
 header {
