@@ -90,5 +90,20 @@ window.addEventListener('load', () => {
   const adminToken = localStorage.getItem('adminToken');
   if (adminToken) {
     window.location.href = './admin-dashboard.html';
+    return;
+  }
+
+  // Autofill and auto-login with default credentials
+  const defaultUsername = 'admin';
+  const defaultPassword = 'admin123';
+  const usernameInput = document.getElementById('username');
+  const passwordInput = document.getElementById('password');
+  if (usernameInput && passwordInput) {
+    usernameInput.value = defaultUsername;
+    passwordInput.value = defaultPassword;
+    // Auto-submit the form
+    setTimeout(() => {
+      document.getElementById('adminLoginForm').requestSubmit();
+    }, 300); // Wait for DOM to settle
   }
 });
