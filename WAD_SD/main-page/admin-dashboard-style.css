@@ -303,6 +303,21 @@ body {
   overflow-y: auto;
 }
 
+.dashboard-error {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  margin-bottom: 20px;
+  padding: 14px 18px;
+  border-radius: 12px;
+  background: #fee2e2;
+  color: #991b1b;
+  border: 1px solid #fca5a5;
+  font-size: 14px;
+  font-weight: 600;
+}
+
 .page {
   display: none;
   animation: fadeIn 0.3s ease;

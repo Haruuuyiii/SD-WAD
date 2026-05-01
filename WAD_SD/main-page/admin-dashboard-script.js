@@ -4,21 +4,35 @@ let userDistributionChart = null;
 
 // Page initialization
 document.addEventListener('DOMContentLoaded', () => {
-  // Check if user is logged in
-  checkAuthentication();
-  
-  // Load dashboard data
-  loadDashboardData();
-  
-  // Initialize charts
-  initializeCharts();
-  
-  // Setup navigation
-  setupNavigation();
-  
-  // Setup chart period selector
-  document.getElementById('chartPeriod').addEventListener('change', updateCharts);
+  try {
+    checkAuthentication();
+    loadDashboardData();
+    initializeCharts();
+    setupNavigation();
+    document.getElementById('chartPeriod').addEventListener('change', updateCharts);
+  } catch (err) {
+    console.error('Admin dashboard error:', err);
+    showDashboardError('Unable to load dashboard content. Check the console for details.');
+  }
 });
+
+window.addEventListener('error', (event) => {
+  console.error('Unhandled error:', event.error || event.message);
+  showDashboardError('A runtime error occurred while loading the dashboard.');
+});
+
+window.addEventListener('unhandledrejection', (event) => {
+  console.error('Unhandled promise rejection:', event.reason);
+  showDashboardError('A promise error occurred while loading the dashboard.');
+});
+
+function showDashboardError(message) {
+  const messageDiv = document.getElementById('dashboardErrorMessage');
+  if (messageDiv) {
+    messageDiv.textContent = message;
+    messageDiv.hidden = false;
+  }
+}
 
 // Check if user is authenticated
 function checkAuthentication() {
