@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>CozMoz | Student Events Portal — Vibrant Palette</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    /* ----- CUSTOM COLOR VARIABLES (exactly as provided) ----- */
+    :root {
+      --header-color: #0e21a0;
+      --background-color: #fff;
+      --text-color: #fff;
+      --color1: #4d2fb2;
+      --color2: #b153d7;
+      --color3: #f375c2;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background:linear-gradient(to right, #15258a, #4d2fb2, #b153d7, #c45599);;
+      color: #1a1f2e;
+      line-height: 1.5;
+    }
+
+    p {
+      color: white;
+    }
+
+    /* custom scrollbar with color2 / color3 accents */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #f0eef7;
+      border-radius: 10px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: var(--color2);
+      border-radius: 10px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--color1);
+    }
+
+    /* container */
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* header + nav (uses header-color and gradient accents) */
+    .navbar {
+      background: var(--header-color);
+      box-shadow: 0 6px 18px rgba(14, 33, 160, 0.2);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+    }
+    .nav-flex {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      padding: 14px 0;
+      gap: 16px;
+    }
+    .logo-area {
+      display: flex;
+      align-items: baseline;
+      gap: 6px;
+    }
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #ffffff, #f0c2ff);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      letter-spacing: -0.5px;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+    }
+    .logo span {
+      font-weight: 300;
+      font-size: 0.9rem;
+      background: none;
+      color: rgba(255,255,240,0.9);
+      -webkit-background-clip: unset;
+      background-clip: unset;
+    }
+    .search-wrapper {
+      flex: 1;
+      max-width: 360px;
+      position: relative;
+    }
+    .search-wrapper i {
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #cbb8ff;
+      font-size: 0.9rem;
+    }
+    .search-input {
+      width: 100%;
+      padding: 10px 16px 10px 38px;
+      border-radius: 60px;
+      border: none;
+      background: rgba(255, 255, 255, 0.18);
+      backdrop-filter: blur(4px);
+      font-size: 0.9rem;
+      transition: all 0.2s;
+      font-family: 'Inter', sans-serif;
+      color: white;
+      outline: none;
+    }
+    .search-input::placeholder {
+      color: rgba(255,255,245,0.7);
+    }
+    .search-input:focus {
+      background: rgba(255, 255, 255, 0.28);
+      box-shadow: 0 0 0 3px rgba(179, 83, 215, 0.4);
+    }
+    .nav-buttons {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+    .btn-nav {
+      background: transparent;
+      border: none;
+      font-weight: 600;
+      font-size: 0.9rem;
+      padding: 8px 18px;
+      border-radius: 40px;
+      cursor: pointer;
+      font-family: inherit;
+      transition: 0.2s;
+      color: white;
+    }
+    .btn-nav:hover {
+      background: rgba(255, 255, 255, 0.2);
+      transform: translateY(-1px);
+    }
+    .btn-login {
+      background: rgba(255,255,245,0.12);
+      border: 1px solid rgba(255,255,255,0.3);
+    }
+    .btn-signup {
+      background: var(--color3);
+      color: #1b0c42;
+      border: none;
+      box-shadow: 0 4px 10px rgba(243, 117, 194, 0.3);
+    }
+    .btn-signup:hover {
+      background: #e05daa;
+      transform: scale(0.97);
+    }
+    .btn-admin {
+      background: var(--color1);
+      border: 1px solid rgba(255,255,255,0.2);
+      color: white;
+    }
+
+    /* hero section (gradient using color1, color2, color3) */
+    .hero {
+      background: linear-gradient(125deg, var(--color1) 0%, var(--color2) 55%, var(--color3) 100%);
+      border-radius: 2rem;
+      margin: 32px 0 24px 0;
+      padding: 52px 32px;
+      text-align: center;
+      box-shadow: 0 12px 28px rgba(77, 47, 178, 0.25);
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+    .hero h1 {
+      font-size: 2.8rem;
+      font-weight: 800;
+      color: white;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.15);
+      letter-spacing: -0.02em;
+    }
+    .hero p {
+      font-size: 1.2rem;
+      color: rgba(255,255,245,0.95);
+      margin-top: 12px;
+      font-weight: 500;
+    }
+
+    /* section titles with color1 underline */
+    .section-title {
+      font-size: 1.9rem;
+      font-weight: 700;
+      margin: 40px 0 20px 0;
+      position: relative;
+      display: inline-block;
+      background: linear-gradient(135deg, var(--color1), var(--color2));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: white;
+    }
+    .section-title:after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+      width: 56px;
+      height: 4px;
+      background: var(--color3);
+      border-radius: 4px;
+    }
+
+    /* events cards — clean white background but creative accents */
+    .events-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+      gap: 28px;
+      margin: 30px 0 40px;
+    }
+    .event-card {
+      background: white;
+      border-radius: 32px;
+      overflow: hidden;
+      box-shadow: 0 16px 28px -12px rgba(77, 47, 178, 0.12);
+      transition: all 0.3s ease;
+      border: 1px solid #ede5ff;
+      display: flex;
+      flex-direction: column;
+    }
+    .event-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 24px 36px -12px rgba(14, 33, 160, 0.25);
+      border-color: var(--color2);
+    }
+    .card-badge {
+      background: linear-gradient(95deg, #f0e9ff, #ffffff);
+      padding: 10px 22px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      color: var(--color1);
+      border-bottom: 1px solid #e9dfff;
+    }
+    .card-content {
+      padding: 22px 22px 20px;
+      flex: 1;
+    }
+    .event-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 12px;
+      background: linear-gradient(145deg, var(--color1), var(--color2));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      line-height: 1.3;
+    }
+    .event-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin: 18px 0;
+      font-size: 0.85rem;
+      color: #4e4b66;
+    }
+    .event-meta i {
+      width: 26px;
+      color: var(--color2);
+    }
+    .event-meta span {
+      margin-left: 6px;
+    }
+    .view-details-btn {
+      background: transparent;
+      border: 1.5px solid #d9c9ff;
+      padding: 10px 0;
+      border-radius: 48px;
+      font-weight: 700;
+      margin-top: 18px;
+      width: 100%;
+      cursor: pointer;
+      transition: 0.2s;
+      font-family: inherit;
+      font-size: 0.9rem;
+      color: var(--color1);
+      background: #fdfaff;
+    }
+    .view-details-btn:hover {
+      background: linear-gradient(95deg, var(--color1), var(--color2));
+      border-color: transparent;
+      color: white;
+      box-shadow: 0 4px 10px rgba(77, 47, 178, 0.3);
+    }
+
+    /* DETAIL PAGE (event details) */
+    .details-section {
+      background: #ffffff;
+      border-radius: 36px;
+      margin: 30px 0 48px;
+      box-shadow: 0 18px 34px -12px rgba(77, 47, 178, 0.18);
+      overflow: hidden;
+      border: 1px solid #eae0ff;
+      animation: fadeSlideUp 0.3s ease;
+    }
+    @keyframes fadeSlideUp {
+      from { opacity: 0; transform: translateY(14px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .details-inner {
+      padding: 36px 38px;
+    }
+    .breadcrumb {
+      font-size: 0.85rem;
+      color: #6f6a8b;
+      margin-bottom: 20px;
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .breadcrumb a {
+      text-decoration: none;
+      color: var(--color2);
+      cursor: pointer;
+      font-weight: 600;
+    }
+    .detail-title {
+      font-size: 2.3rem;
+      font-weight: 800;
+      background: linear-gradient(125deg, var(--color1), var(--color3));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      margin: 8px 0 20px 0;
+    }
+    .info-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 32px;
+      background: #f9f6ff;
+      padding: 28px;
+      border-radius: 28px;
+      margin: 28px 0;
+    }
+    .info-item {
+      flex: 1;
+      min-width: 180px;
+    }
+    .info-label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-weight: 700;
+      color: var(--color1);
+    }
+    .info-value {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-top: 8px;
+      color: #242038;
+    }
+    .description-box h3 {
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin-bottom: 14px;
+      color: var(--color1);
+    }
+    .description-text {
+      background: #fefcff;
+      padding: 22px;
+      border-radius: 24px;
+      border: 1px solid #ece2ff;
+      line-height: 1.65;
+      color: #2c2742;
+    }
+    .register-btn {
+      background: linear-gradient(115deg, var(--color1), var(--color2));
+      border: none;
+      padding: 14px 36px;
+      font-weight: 700;
+      font-size: 1rem;
+      border-radius: 58px;
+      color: white;
+      cursor: pointer;
+      transition: 0.2s;
+      margin-top: 16px;
+      font-family: inherit;
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      box-shadow: 0 10px 18px -8px rgba(77, 47, 178, 0.4);
+    }
+    .register-btn:hover {
+      background: linear-gradient(115deg, var(--color2), var(--color3));
+      transform: scale(0.98);
+    }
+    .back-to-list {
+      background: #efeaff;
+      border: none;
+      padding: 10px 24px;
+      border-radius: 44px;
+      cursor: pointer;
+      font-weight: 600;
+      margin-top: 8px;
+      transition: 0.2s;
+      color: var(--color1);
+    }
+    .back-to-list:hover {
+      background: #e2d6ff;
+    }
+
+    /* empty state matching palette */
+    .empty-state {
+      text-align: center;
+      padding: 60px 20px;
+      background: #fefbff;
+      border-radius: 36px;
+      color: var(--color1);
+      border: 1px solid #e3d6ff;
+    }
+    .footer {
+      text-align: center;
+      padding: 32px 0;
+      border-top: 2px solid #ede3ff;
+      margin-top: 48px;
+      color: #5f5890;
+      background: #faf7ff;
+    }
+
+    /* responsive */
+    @media (max-width: 720px) {
+      .nav-flex { flex-direction: column; align-items: stretch; }
+      .search-wrapper { max-width: 100%; }
+      .hero h1 { font-size: 2rem; }
+      .details-inner { padding: 22px; }
+      .detail-title { font-size: 1.7rem; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="navbar">
+  <div class="container">
+    <div class="nav-flex">
+      <div class="logo-area">
+        <div class="logo">CozMoz<span> | Student Hub</span></div>
+      </div>
+      <div class="search-wrapper">
+        <i class="fas fa-search"></i>
+        <input type="text" id="searchInput" class="search-input" placeholder="Search events by title...">
+      </div>
+      <div class="nav-buttons">
+        <button class="btn-nav btn-login" id="loginBtn"><i class="far fa-user-circle"></i> LOGIN</button>
+        <button class="btn-nav btn-signup" id="signupBtn">SIGNUP</button>
+        <button class="btn-nav btn-admin" id="adminBtn"><i class="fas fa-laptop"></i> ADMIN</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container" id="appRoot">
+  <div class="hero">
+    <h1>Step Into the CozMoz Experience</h1>
+    <p>Discover, connect, and join the most vibrant campus events — all in one place.</p>
+  </div>
+  <div id="dynamicContent"></div>
+</div>
+
+<div class="footer container">
+  <p>© 2026 CozMoz — Empowering student connections with vibrant energy.</p>
+</div>
+
+<script>
+  // ---------- EVENTS DATABASE (exactly matching descriptions from screenshots) ----------
+  const eventsData = [
+    {
+      id: 1,
+      title: "Cultural Night: Fiesta del Arte",
+      date: "May 09, 2026 at 6:00 PM",
+      regDeadline: "May 05, 2026 11:59 PM",
+      location: "Open Air Theater",
+      description: "Immerse yourself in a vibrant celebration of music, dance, and art. Performances from student cultural groups, food stalls, and interactive workshops. Don't miss the grand finale!"
+    },
+    {
+      id: 2,
+      title: "SIGNING OF CLEARANCE",
+      date: "MAY 4, 2026 at 9:40 AM",
+      regDeadline: "Apr 30, 2026 10:49 AM",
+      location: "URS MORONG - EARTS",
+      description: "Completion of clearance"
+    },
+    {
+      id: 3,
+      title: "CAMPUS CLASH",
+      date: "Apr 25, 2026 at 9:30 AM",
+      regDeadline: "Apr 25, 2026 07:00 PM",
+      location: "URS MORONG - QUAD",
+      description: "DIGITAL GIANTS ESPORTS"
+    },
+  ];
+
+  let currentView = 'list';
+  let selectedEventId = null;
+  let searchQuery = '';
+
+  const dynamicContainer = document.getElementById('dynamicContent');
+
+  function getFilteredEvents() {
+    if (!searchQuery.trim()) return [...eventsData];
+    const lowerQuery = searchQuery.toLowerCase();
+    return eventsData.filter(ev => ev.title.toLowerCase().includes(lowerQuery));
+  }
+
+  function renderListView() {
+    const filtered = getFilteredEvents();
+    if (filtered.length === 0) {
+      dynamicContainer.innerHTML = `
+        <div class="empty-state">
+          <i class="fas fa-calendar-times" style="font-size: 3rem; opacity: 0.6; color: var(--color2);"></i>
+          <h3 style="margin-top: 16px;">No matching events</h3>
+          <p>Try adjusting your search or discover more amazing activities.</p>
+          <button class="back-to-list" id="clearSearchBtn" style="margin-top: 16px;">Clear Search</button>
+        </div>
+      `;
+      const clearBtn = document.getElementById('clearSearchBtn');
+      if (clearBtn) clearBtn.addEventListener('click', () => {
+        const searchInputElem = document.getElementById('searchInput');
+        if (searchInputElem) searchInputElem.value = '';
+        searchQuery = '';
+        renderCurrentView();
+      });
+      return;
+    }
+
+    const eventsHTML = `
+      <div class="events-grid">
+        ${filtered.map(ev => `
+          <div class="event-card" data-event-id="${ev.id}">
+            <div class="card-badge"><i class="far fa-calendar-alt"></i> ✨ Upcoming Event</div>
+            <div class="card-content">
+              <div class="event-title">${escapeHtml(ev.title)}</div>
+              <div class="event-meta">
+                <div><i class="far fa-calendar-check"></i><span>${escapeHtml(ev.date)}</span></div>
+                <div><i class="fas fa-map-marker-alt"></i><span>${escapeHtml(ev.location)}</span></div>
+                <div><i class="far fa-clock"></i><span>Reg. deadline: ${escapeHtml(ev.regDeadline)}</span></div>
+              </div>
+              <button class="view-details-btn" data-id="${ev.id}">View Details <i class="fas fa-arrow-right"></i></button>
+            </div>
+          </div>
+        `).join('')}
+      </div>
+    `;
+    dynamicContainer.innerHTML = `
+      <div class="section-title">📅 Upcoming Events</div>
+      <p style="margin-bottom: 8px;">Don't miss out — register for these exciting events happening at your college.</p>
+      ${eventsHTML}
+    `;
+    document.querySelectorAll('.view-details-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const id = parseInt(btn.getAttribute('data-id'), 10);
+        showEventDetails(id);
+      });
+    });
+  }
+
+  function showEventDetails(eventId) {
+    const event = eventsData.find(ev => ev.id === eventId);
+    if (!event) return;
+    selectedEventId = eventId;
+    currentView = 'detail';
+    renderDetailView(event);
+  }
+
+  function renderDetailView(event) {
+    const detailHtml = `
+      <div class="details-section">
+        <div class="details-inner">
+          <div class="breadcrumb">
+            <a id="breadHome">Home</a> &gt; 
+            <a id="breadEvents">Events</a> &gt; 
+            <span style="color:var(--color2); font-weight:600;">${escapeHtml(event.title)}</span>
+          </div>
+          <div class="detail-title">${escapeHtml(event.title)}</div>
+          <div class="info-grid">
+            <div class="info-item">
+              <div class="info-label"><i class="far fa-calendar-alt"></i> DATE & TIME</div>
+              <div class="info-value">${escapeHtml(event.date)}</div>
+            </div>
+            <div class="info-item">
+              <div class="info-label"><i class="fas fa-map-pin"></i> LOCATION</div>
+              <div class="info-value">${escapeHtml(event.location)}</div>
+            </div>
+            <div class="info-item">
+              <div class="info-label"><i class="far fa-hourglass-half"></i> REGISTRATION DEADLINE</div>
+              <div class="info-value">${escapeHtml(event.regDeadline)}</div>
+            </div>
+          </div>
+          <div class="description-box">
+            <h3>About This Event</h3>
+            <div class="description-text">
+              ${escapeHtml(event.description)}
+            </div>
+          </div>
+          <div style="display: flex; gap: 20px; align-items: center; flex-wrap: wrap;">
+            <button class="register-btn" id="registerNowBtn"><i class="fas fa-ticket-alt"></i> Register Now</button>
+            <button class="back-to-list" id="backToListBtn"><i class="fas fa-chevron-left"></i> Back to Events</button>
+          </div>
+        </div>
+      </div>
+    `;
+    dynamicContainer.innerHTML = detailHtml;
+    document.getElementById('breadHome')?.addEventListener('click', () => {
+      searchQuery = '';
+      const searchInputField = document.getElementById('searchInput');
+      if (searchInputField) searchInputField.value = '';
+      currentView = 'list';
+      renderCurrentView();
+    });
+    document.getElementById('breadEvents')?.addEventListener('click', () => {
+      currentView = 'list';
+      renderCurrentView();
+    });
+    document.getElementById('backToListBtn')?.addEventListener('click', () => {
+      currentView = 'list';
+      renderCurrentView();
+    });
+    document.getElementById('registerNowBtn')?.addEventListener('click', () => {
+      alert(`✅ You've successfully registered for "${event.title}"!\n📩 Confirmation will be sent to your student email.`);
+    });
+  }
+
+  function renderCurrentView() {
+    if (currentView === 'list') {
+      renderListView();
+    } else if (currentView === 'detail' && selectedEventId) {
+      const ev = eventsData.find(e => e.id === selectedEventId);
+      if (ev) renderDetailView(ev);
+      else {
+        currentView = 'list';
+        renderListView();
+      }
+    } else {
+      currentView = 'list';
+      renderListView();
+    }
+  }
+
+  function escapeHtml(str) {
+    if (!str) return '';
+    return str.replace(/[&<>]/g, function(m) {
+      if (m === '&') return '&amp;';
+      if (m === '<') return '&lt;';
+      if (m === '>') return '&gt;';
+      return m;
+    });
+  }
+
+  function initSearchListener() {
+    const searchInput = document.getElementById('searchInput');
+    if (searchInput) {
+      searchInput.addEventListener('input', (e) => {
+        searchQuery = e.target.value;
+        if (currentView === 'list') {
+          renderCurrentView();
+        } else {
+          // if user searches while on detail page, we bring list view for clarity (matching intuitive flow)
+          currentView = 'list';
+          renderCurrentView();
+        }
+      });
+    }
+  }
+
+  function initNavButtons() {
+    document.getElementById('loginBtn')?.addEventListener('click', () => alert('🔐 Student Login — Welcome back to CozMoz! Explore events.'));
+    document.getElementById('signupBtn')?.addEventListener('click', () => alert('📝 Sign up for CozMoz! Create your vibrant campus profile.'));
+    document.getElementById('adminBtn')?.addEventListener('click', () => alert('👑 Admin Dashboard (demo). Manage events, users, and insights.'));
+  }
+
+  function init() {
+    renderCurrentView();
+    initSearchListener();
+    initNavButtons();
+  }
+
+  init();
+</script>
+</body>
+</html>
