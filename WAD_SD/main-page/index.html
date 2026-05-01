@@ -18,7 +18,7 @@
 </head>
 <body>
   <!-- Header Section -->
-   <header>
+  <header>
     <nav class="navbar">
       <a href="#" class="main-menu">
         <img class="logo" src="../images/logo.png" alt="logo">
@@ -30,7 +30,6 @@
         <i class="fa-solid fa-magnifying-glass"></i>
       </div>
 
-      
       <ul class="nav-menu">
         <li class="nav-items">
           <a href="#" class="nav-link" id="loginBtn">LOGIN</a>
@@ -43,97 +42,98 @@
         </li>
       </ul>   
     </nav>
-   </header>
+  </header>
 
-   <!-- Hero Section -->
-    <section id="hero">
-      <div class="section-content">
-        <h1>Step Into the CozMoz Experience</h1>
+  <!-- Hero Section -->
+  <section id="hero">
+    <div class="section-content">
+      <h1>Step Into the CozMoz Experience</h1>
+    </div>
+  </section>
+
+  <!-- Announcements Section -->
+  <section id="announcements-section">
+    <h2 class="section-title">Announcements</h2>
+    <div class="announcements-list">
+      <div class="announcement-card">
+        <div class="announcement-icon"><i class="fa-regular fa-message"></i></div>
+        <div class="announcement-content">
+          <strong>Life and Works of Rizal</strong>
+          <div>@everyone Gagawa ako ng drive para sa rizal, napicturan nyo ba ma gawa nyo bago ipasa saakin?</div>
+        </div>
       </div>
+      <div class="announcement-card">
+        <div class="announcement-icon"><i class="fa-regular fa-message"></i></div>
+        <div class="announcement-content">
+          <strong>PATHFIT</strong>
+          <div>@everyone 9:30 tom pathfit</div>
+        </div>
+      </div>
+      <div class="announcement-card">
+        <div class="announcement-icon"><i class="fa-regular fa-message"></i></div>
+        <div class="announcement-content">
+          <strong>GenSoc</strong>
+          <div>written exam 7:30-8:30 monday</div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    </section>
+  <!-- Overlay backdrop -->
+  <div id="overlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.55);z-index:999;"></div>
 
-     <!-- Announcements Section -->
-     <section id="announcements-section">
-       <h2 class="section-title">Announcements</h2>
-       <div class="announcements-list">
-         <div class="announcement-card">
-           <div class="announcement-icon"><i class="fa-regular fa-message"></i></div>
-           <div class="announcement-content">
-             <strong>Life and Works of Rizal</strong>
-             <div>@everyone Gagawa ako ng drive para sa rizal, napicturan nyo ba ma gawa nyo bago ipasa saakin?</div>
-           </div>
-         </div>
-         <div class="announcement-card">
-           <div class="announcement-icon"><i class="fa-regular fa-message"></i></div>
-           <div class="announcement-content">
-             <strong>PATHFIT</strong>
-             <div>@everyone 9:30 tom pathfit</div>
-           </div>
-         </div>
-         <div class="announcement-card">
-           <div class="announcement-icon"><i class="fa-regular fa-message"></i></div>
-           <div class="announcement-content">
-             <strong>GenSoc</strong>
-             <div>written exam 7:30-8:30 monday</div>
-           </div>
-         </div>
-       </div>
-     </section>
+  <!-- Login Popup -->
+  <div class="login-popup" id="loginPopup" style="z-index:1000;">
+    <div class="close-btn" id="closeBtn">&times;</div>
+    <h2>LOGIN</h2>
+    <hr>
+    <form>
+      <label>Username</label>
+      <input type="text" placeholder="Enter your username">
 
-   <!-- Login Popup Section -->
-    <!-- Login Popup -->
-     <div class="login-popup" id="loginPopup">
-      <div class="close-btn" id="closeBtn">&times;</div>
-      <h2>LOGIN</h2>
-      <hr>
-      <form>
-        <label>Username</label>
-        <input type="text" placeholder="Enter your username">
+      <label>Password</label>
+      <input type="password" placeholder="Enter your password">
 
-        <label>Password</label>
-        <input type="text" placeholder="Enter your password">
+      <button type="submit" class="submit">Login</button>
+    </form>
+  </div>
 
-        <button type="submit" class="submit">Login</button>
-      </form>
-     </div>
-
-   <!-- 2nd Section -->
-    <section id="second-section">
-      <div class="grid-container">
+  <!-- 2nd Section -->
+  <section id="second-section">
+    <div class="grid-container">
+      
+      <div class="content-container">
+        <div class="grid-content">
+          <img class="event-img" src="../images/campus clash.jpg" alt="">
+        </div>
         
-        <div class="content-container">
-          <div class="grid-content">
-            <img class="event-img" src="../images/campus clash.jpg" alt="">
-          </div>
-          
-          <div class="ticket-btn">
-            <h2 class="ticket"> BUY TICKETS</h1>
-          </div>
+        <div class="ticket-btn">
+          <h2 class="ticket"> BUY TICKETS</h1>
         </div>
-
-        <div class="content-container">
-          <div class="grid-content">
-  
-          </div>
-          
-          <div class="ticket-btn">
-            <h2 class="ticket"> BUY TICKETS</h1>
-          </div>
-        </div>
-
-        <div class="content-container">
-          <div class="grid-content">
-  
-          </div>
-          
-          <div class="ticket-btn">
-            <h2 class="ticket"> BUY TICKETS</h1>
-          </div>
-        </div>
-
       </div>
-    </section>
+
+      <div class="content-container">
+        <div class="grid-content">
+
+        </div>
+        
+        <div class="ticket-btn">
+          <h2 class="ticket"> BUY TICKETS</h1>
+        </div>
+      </div>
+
+      <div class="content-container">
+        <div class="grid-content">
+
+        </div>
+        
+        <div class="ticket-btn">
+          <h2 class="ticket"> BUY TICKETS</h1>
+        </div>
+      </div>
+
+    </div>
+  </section>
 
   <!-- JavaScript -->
   <script src="script.js"></script>

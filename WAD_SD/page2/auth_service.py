@@ -1,15 +1,13 @@
-
 from flask import Flask, request, jsonify
 from flask_cors import CORS
+import requests
 import time
 
 app = Flask(__name__)
 CORS(app)
 
-# ── User "database" (replace with real DB/PHP in production)
-USERS = {
-    "admin": {"password": "1234",    "role": "admin"},
-}
+# ── Points to your XAMPP/WAMP PHP API ─────────────────────────
+PHP_API_BASE = "http://localhost/SD-WAD/WAD_SD/page2/api.php"
 
 active_tokens = {}
 
@@ -17,6 +15,16 @@ def make_token(username):
     token = f"token-{username}-{int(time.time())}"
     active_tokens[token] = {"username": username, "created": time.time()}
     return token
+
+def call_php(endpoint, data):
+    """POST to api.php and return (json_dict, status_code)."""
+    try:
+        url = f"{PHP_API_BASE}/{endpoint}"
+        resp = requests.post(url, json=data, timeout=5)
+        return resp.json(), resp.status_code
+    except requests.exceptions.RequestException as e:
+        print(f"PHP API error: {e}")
+        return {"error": "Database unreachable"}, 503
 
 @app.route("/health")
 def health():
@@ -28,31 +36,27 @@ def login():
     username = data.get("username", "").strip()
     password = data.get("password", "")
 
-    user = USERS.get(username)
-    if not user or user["password"] != password:
-        return jsonify({"error": "Invalid username or password"}), 401
+    if not username or not password:
+        return jsonify({"error": "Username and password are required"}), 400
 
-    token = make_token(username)
-    return jsonify({
-        "message":  f"Welcome, {username}!",
-        "token":    token,
-        "username": username,
-        "role":     user["role"]
-    })
+    # ── Ask api.php to verify credentials against the real DB ──
+    result, status = call_php("login", {"username": username, "password": password})
+
+    if status == 200 and "token" in result:
+        # Cache the token locally so gateway can verify it
+        active_tokens[result["token"]] = {
+            "username": result.get("username", username),
+            "created":  time.time()
+        }
+        return jsonify(result), 200
+
+    return jsonify({"error": result.get("error", "Invalid username or password")}), 401
 
 @app.route("/register", methods=["POST"])
 def register():
-    data     = request.get_json()
-    username = data.get("username", "").strip()
-    password = data.get("password", "")
-
-    if not username or not password:
-        return jsonify({"error": "Username and password are required"}), 400
-    if username in USERS:
-        return jsonify({"error": "Username already exists"}), 409
-
-    USERS[username] = {"password": password, "role": "user"}
-    return jsonify({"message": f"Account created! Welcome, {username}!"})
+    data = request.get_json()
+    result, status = call_php("register", data)
+    return jsonify(result), status
 
 @app.route("/verify", methods=["POST"])
 def verify():

@@ -19,6 +19,24 @@
     />
   </head>
   <body>
+
+    <!-- Overlay backdrop -->
+    <div id="overlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.55);z-index:999;"></div>
+
+    <!-- Login Popup -->
+    <div class="login-popup" id="loginPopup" style="z-index:1000;">
+      <div class="close-btn" id="closeBtn">&times;</div>
+      <h2>LOGIN</h2>
+      <hr>
+      <form>
+        <label>Username</label>
+        <input type="text" placeholder="Enter your username">
+        <label>Password</label>
+        <input type="password" placeholder="Enter your password">
+        <button type="submit" class="submit">Login</button>
+      </form>
+    </div>
+
     <header>
       <nav class="navbar">
         <a href="../main-page/index.html" class="main-menu">
@@ -30,7 +48,12 @@
           <li class="nav-items">
             <a href="../main-page/index.html" class="nav-link">HOME</a>
           </li>
-          <li class="nav-items"><a href="#" class="nav-link">ADMIN</a></li>
+          <li class="nav-items">
+            <a href="#" class="nav-link" id="loginBtn">LOGIN</a>
+          </li>
+          <li class="nav-items">
+            <a href="./admin-login.html" class="nav-link admin-link">ADMIN</a>
+          </li>
         </ul>
       </nav>
     </header>
@@ -39,8 +62,7 @@
       <section id="events-section">
         <h1 class="events-title">Upcoming Events</h1>
         <p class="events-desc">
-          Don't miss out — register for these exciting events happening at your
-          college.
+          Don't miss out — register for these exciting events happening at your college.
         </p>
         <div class="events-list">
           <div class="event-card upcoming">
@@ -49,14 +71,8 @@
             <div class="event-info">
               <strong>Cultural Night</strong>
               <div class="event-meta">
-                <span
-                  ><i class="fa-regular fa-calendar"></i> May 09, 2026 at 6:00
-                  PM</span
-                >
-                <span
-                  ><i class="fa-solid fa-location-dot"></i> Open Air
-                  Theater</span
-                >
+                <span><i class="fa-regular fa-calendar"></i> May 09, 2026 at 6:00 PM</span>
+                <span><i class="fa-solid fa-location-dot"></i> Open Air Theater</span>
               </div>
               <a href="event-details.html" class="event-btn">View Details</a>
             </div>
@@ -67,14 +83,8 @@
             <div class="event-info">
               <strong>Campus Clash</strong>
               <div class="event-meta">
-                <span
-                  ><i class="fa-regular fa-calendar"></i> Apr 22, 2026 at 12:40
-                  PM</span
-                >
-                <span
-                  ><i class="fa-solid fa-location-dot"></i> URS MORONG -
-                  EARTS</span
-                >
+                <span><i class="fa-regular fa-calendar"></i> Apr 22, 2026 at 12:40 PM</span>
+                <span><i class="fa-solid fa-location-dot"></i> URS MORONG - EARTS</span>
               </div>
               <a href="event-details.html" class="event-btn">View Details</a>
             </div>
@@ -83,16 +93,10 @@
             <div class="event-img event-img-3"></div>
             <div class="event-status">UPCOMING</div>
             <div class="event-info">
-              <strong>Start of Signing of Clearance </strong>
+              <strong>Start of Signing of Clearance</strong>
               <div class="event-meta">
-                <span
-                  ><i class="fa-regular fa-calendar"></i> Apr 21, 2026 at 6:35
-                  AM</span
-                >
-                <span
-                  ><i class="fa-solid fa-location-dot"></i> URS MORONG -
-                  QUAD</span
-                >
+                <span><i class="fa-regular fa-calendar"></i> Apr 21, 2026 at 6:35 AM</span>
+                <span><i class="fa-solid fa-location-dot"></i> URS MORONG - QUAD</span>
               </div>
               <a href="event-details.html" class="event-btn">View Details</a>
             </div>
@@ -103,5 +107,8 @@
         </div>
       </section>
     </main>
+
+    <!-- Shared login script — reads localStorage so state persists across pages -->
+    <script src="./script.js"></script>
   </body>
 </html>
