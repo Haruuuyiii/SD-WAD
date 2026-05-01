@@ -107,9 +107,9 @@ def get_registrations_by_event():
     conn = get_db_connection()
     if not conn:
         return jsonify({"error": "Database connection failed"}), 500
-    
+
     cursor = conn.cursor(dictionary=True)
-    
+
     try:
         query = """
             SELECT 
@@ -125,19 +125,20 @@ def get_registrations_by_event():
         """
         cursor.execute(query)
         events = cursor.fetchall()
-        
+
         # Format response
         result = []
         colors = ['#3b82f6', '#f97316', '#06b6d4', '#8b5cf6', '#ec4899']
-        for idx, event in enumerate(events):
-            result.append({
+        result.extend(
+            {
                 'name': event['event_name'],
                 'registrations': event['registrations'],
-                'color': event['color'] or colors[idx % len(colors)]
-            })
-        
+                'color': event['color'] or colors[idx % len(colors)],
+            }
+            for idx, event in enumerate(events)
+        )
         return jsonify({'eventRegistrations': result})
-    
+
     except Error as e:
         return jsonify({"error": str(e)}), 500
     finally:
@@ -189,14 +190,14 @@ def get_user_distribution():
 # ─────────────────────────────────────────────────────────────
 
 @app.route("/dashboard/recent-registrations", methods=["GET"])
-def get_recent_registrations():
+def get_recent_registrations():  # sourcery skip: low-code-quality
     """Get recent user registrations"""
     conn = get_db_connection()
     if not conn:
         return jsonify({"error": "Database connection failed"}), 500
-    
+
     cursor = conn.cursor(dictionary=True)
-    
+
     try:
         query = """
             SELECT 
@@ -216,7 +217,7 @@ def get_recent_registrations():
         """
         cursor.execute(query)
         registrations = cursor.fetchall()
-        
+
         # Format response
         result = []
         for reg in registrations:
@@ -225,7 +226,7 @@ def get_recent_registrations():
             if isinstance(created_time, str):
                 created_time = datetime.fromisoformat(created_time)
             time_diff = datetime.now() - created_time
-            
+
             if time_diff.days > 0:
                 time_ago = f"{time_diff.days} day{'s' if time_diff.days > 1 else ''} ago"
             elif time_diff.seconds > 3600:
@@ -236,18 +237,14 @@ def get_recent_registrations():
                 time_ago = f"{minutes} minute{'s' if minutes > 1 else ''} ago"
             else:
                 time_ago = "Just now"
-            
+
             # Determine badge status
-            if reg['checked_in']:
+            if reg['checked_in'] or reg['status'] != 'pending':
                 badge = 'verified'
                 badge_text = 'Verified'
-            elif reg['status'] == 'pending':
+            else:
                 badge = 'pending'
                 badge_text = 'Pending'
-            else:
-                badge = 'verified'
-                badge_text = 'Verified'
-            
             result.append({
                 'name': f"{reg['first_name']} {reg['last_name']}",
                 'initials': (reg['first_name'][0] + reg['last_name'][0]).upper(),
@@ -256,9 +253,9 @@ def get_recent_registrations():
                 'badge': badge,
                 'badge_text': badge_text
             })
-        
+
         return jsonify({'recentRegistrations': result})
-    
+
     except Error as e:
         return jsonify({"error": str(e)}), 500
     finally:
@@ -814,22 +811,3 @@ def not_found(error):
 @app.errorhandler(500)
 def server_error(error):
     return jsonify({"error": "Internal server error"}), 500
-
-    print("  Running on: http://localhost:3003")
-    print("=" * 60)
-    app.run(debug=True, port=3003)
-    print("  Running on: http://localhost:3003")
-    print("  CORS: Enabled for frontend")
-    print("=" * 60)
-    print("\nEndpoints:")
-    print("  GET  /health")
-    print("  GET  /dashboard/stats")
-    print("  GET  /dashboard/registrations-by-event")
-    print("  GET  /dashboard/user-distribution")
-    print("  GET  /dashboard/recent-registrations")
-    print("  GET  /dashboard/events")
-    print("  GET  /dashboard/registrations")
-    print("  GET  /dashboard/attendance")
-    print("=" * 60 + "\n")
-    
-    app.run(debug=True, port=3003, host='0.0.0.0')
