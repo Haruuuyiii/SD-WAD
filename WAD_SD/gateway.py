@@ -10,6 +10,7 @@ CORS(app)
 SERVICES = {
     "auth":  "http://localhost:3001",
     "user":  "http://localhost:3002",
+    "admin": "http://localhost:3003",
     "notif": "http://localhost:3004",
 }
 
@@ -40,7 +41,7 @@ def check_auth(req):
 @app.before_request
 def middleware():
     ip = request.remote_addr
-    public = ["/health", "/api/auth/login", "/api/auth/register", "/"]
+    public = ["/health", "/api/auth/login", "/api/auth/register", "/api/admin/login", "/"]
     if request.path in public or request.path.startswith("/static"):
         return None
 
@@ -144,6 +145,34 @@ def notif_log():
         return jsonify({"error": "Notification service is offline"}), 503
 
 
+@app.route("/api/admin/login", methods=["POST"])
+def admin_login():
+    """
+    Admin login — forwards to admin_service.py
+    """
+    data = request.get_json()
+    try:
+        resp = requests.post(f"{SERVICES['admin']}/admin/login", json=data, timeout=5)
+        return jsonify(resp.json()), resp.status_code
+    except requests.exceptions.ConnectionError:
+        return jsonify({"error": "Admin service is offline. Start admin_service.py"}), 503
+
+
+@app.route("/dashboard/<path:endpoint>", methods=["GET", "POST"])
+def dashboard_proxy(endpoint):
+    """
+    Proxy all dashboard requests to admin_service.py
+    """
+    try:
+        if request.method == "GET":
+            resp = requests.get(f"{SERVICES['admin']}/dashboard/{endpoint}", timeout=5)
+        else:
+            resp = requests.post(f"{SERVICES['admin']}/dashboard/{endpoint}", json=request.get_json(), timeout=5)
+        return jsonify(resp.json()), resp.status_code
+    except requests.exceptions.ConnectionError:
+        return jsonify({"error": "Admin service is offline"}), 503
+
+
 if __name__ == "__main__":
     print("=" * 55)
     print("  CozMoz API Gateway — http://localhost:3000")
@@ -151,6 +180,7 @@ if __name__ == "__main__":
     print("  Services expected at:")
     print("    auth_service.py  → http://localhost:3001")
     print("    user_service.py  → http://localhost:3002")
+    print("    admin_service.py → http://localhost:3003")
     print("    notif_service.py → http://localhost:3004")
     print("=" * 55)
     app.run(debug=True, port=3000)

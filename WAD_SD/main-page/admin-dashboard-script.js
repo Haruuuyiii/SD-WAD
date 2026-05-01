@@ -51,8 +51,8 @@ function checkAuthentication() {
 
 // Load dashboard data from API
 function loadDashboardData() {
-  // Fetch stats from admin service
-  fetch('http://localhost:3003/dashboard/stats')
+  // Fetch stats from gateway (routes to admin_service.py)
+  fetch('http://localhost:3000/dashboard/stats')
     .then(response => {
       if (!response.ok) throw new Error('Failed to fetch stats');
       return response.json();
@@ -71,11 +71,11 @@ function loadDashboardData() {
     })
     .catch(err => {
       console.error('Error loading stats:', err);
-      showDashboardError('Failed to load dashboard statistics. Make sure admin_service.py is running.');
+      showDashboardError('Failed to load dashboard statistics. Make sure gateway.py is running.');
     });
   
   // Fetch event registrations
-  fetch('http://localhost:3003/dashboard/registrations-by-event')
+  fetch('http://localhost:3000/dashboard/registrations-by-event')
     .then(response => response.json())
     .then(data => {
       if (data.eventRegistrations) {
@@ -85,7 +85,7 @@ function loadDashboardData() {
     .catch(err => console.error('Error loading registrations by event:', err));
   
   // Fetch user distribution
-  fetch('http://localhost:3003/dashboard/user-distribution')
+  fetch('http://localhost:3000/dashboard/user-distribution')
     .then(response => response.json())
     .then(data => {
       if (data.userDistribution) {
@@ -95,7 +95,7 @@ function loadDashboardData() {
     .catch(err => console.error('Error loading user distribution:', err));
   
   // Fetch recent registrations
-  fetch('http://localhost:3003/dashboard/recent-registrations')
+  fetch('http://localhost:3000/dashboard/recent-registrations')
     .then(response => response.json())
     .then(data => {
       if (data.recentRegistrations) {

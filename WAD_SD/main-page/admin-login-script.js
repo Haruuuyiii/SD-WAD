@@ -38,8 +38,8 @@ document.getElementById('adminLoginForm').addEventListener('submit', async (e) =
     loginBtn.textContent = 'Logging in...';
     loginBtn.disabled = true;
     
-    // Login using admin_service.py
-    const response = await fetch('http://localhost:3003/admin/login', {
+    // Login using gateway (routes to admin_service.py on port 3003)
+    const response = await fetch('http://localhost:3000/api/admin/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -71,7 +71,7 @@ document.getElementById('adminLoginForm').addEventListener('submit', async (e) =
     }
   } catch (error) {
     console.error('Login error:', error);
-    showMessage('Cannot reach admin service. Make sure admin_service.py is running on port 3003.', 'error');
+    showMessage('Cannot reach admin service. Make sure gateway.py is running on port 3000.', 'error');
     const loginBtn = document.querySelector('.login-btn');
     loginBtn.textContent = 'Sign In';
     loginBtn.disabled = false;

@@ -262,3 +262,12 @@ def not_found(error):
 @app.errorhandler(500)
 def server_error(error):
     return jsonify({"error": "Internal server error"}), 500
+
+if __name__ == "__main__":
+    print("=" * 55)
+    print("  Admin Dashboard Service — http://localhost:3003")
+    print("=" * 55)
+    print("  Connected to PHP API at:")
+    print(f"    {PHP_API_BASE_URL}")
+    print("=" * 55)
+    app.run(debug=True, port=3003)
