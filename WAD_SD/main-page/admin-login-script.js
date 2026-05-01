@@ -32,8 +32,8 @@ document.getElementById('adminLoginForm').addEventListener('submit', async (e) =
   }
   
   try {
-    // Try to login using the auth service
-    const response = await fetch('http://localhost:5000/login', {
+    // Try to login using the gateway service
+    const response = await fetch('http://localhost:3000/api/auth/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -64,7 +64,7 @@ document.getElementById('adminLoginForm').addEventListener('submit', async (e) =
     }
   } catch (error) {
     console.error('Login error:', error);
-    showMessage('Connection error. Please try again.', 'error');
+    showMessage('Cannot reach the authentication server. Start gateway.py or auth_service.py.', 'error');
   }
 });
 

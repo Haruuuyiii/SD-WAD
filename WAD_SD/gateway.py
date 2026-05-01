@@ -1,6 +1,6 @@
-from flask import Flask, request, jsonify, send_from_directory
-from flask_cors import CORS
-import requests
+from flask import Flask, request, jsonify, send_from_directory # type: ignore
+from flask_cors import CORS # type: ignore
+import requests # type: ignore
 import time
 import os
 
@@ -8,7 +8,7 @@ app = Flask(__name__, static_folder="static")
 CORS(app)
 
 SERVICES = {
-    "auth":  "http://localhost:3001", 
+    "auth":  "http://localhost:3000", 
     "user":  "http://localhost:3002", 
     "notif": "http://localhost:3004", 
 }
@@ -149,8 +149,8 @@ if __name__ == "__main__":
     print("  CozMoz API Gateway — http://localhost:3000")
     print("=" * 55)
     print("  Services expected at:")
-    print("    auth_service.py  → http://localhost:3001")
-    print("    user_service.py  → http://localhost:3002")
-    print("    notif_service.py → http://localhost:3004")
+    print("    auth_service.py  → http://localhost:3000")
+    print("    user_service.py  → http://localhost:3000")
+    print("    notif_service.py → http://localhost:3000")
     print("=" * 55)
     app.run(debug=True, port=3000)
