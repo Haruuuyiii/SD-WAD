@@ -49,46 +49,92 @@ function checkAuthentication() {
   document.getElementById('adminName').textContent = adminUsername;
 }
 
-// Load dashboard data
+// Load dashboard data from API
 function loadDashboardData() {
-  // Sample data - Replace with actual API calls
-  const dashboardData = {
-    totalEvents: 6,
-    totalRegistrations: 13,
-    activeEvents: 6,
-    ticketsBought: 4,
-    loggedInUsers: 8,
-    totalUsers: 24,
-    eventRegistrations: [
-      { name: 'TechTalk 2024', registrations: 4, color: '#3b82f6' },
-      { name: 'Web Dev Workshop', registrations: 3, color: '#f97316' },
-      { name: 'Design Bootcamp', registrations: 3, color: '#06b6d4' },
-      { name: 'AI Summit', registrations: 2, color: '#8b5cf6' },
-      { name: 'Mobile Dev Conference', registrations: 1, color: '#ec4899' }
-    ],
-    userDistribution: {
-      registered: 13,
-      attended: 4,
-      pending: 7
-    }
-  };
+  // Fetch stats from admin service
+  fetch('http://localhost:3003/dashboard/stats')
+    .then(response => {
+      if (!response.ok) throw new Error('Failed to fetch stats');
+      return response.json();
+    })
+    .then(stats => {
+      // Update stat cards with real data
+      document.getElementById('totalEvents').textContent = stats.totalEvents || 0;
+      document.getElementById('totalRegistrations').textContent = stats.totalRegistrations || 0;
+      document.getElementById('activeEvents').textContent = stats.activeEvents || 0;
+      document.getElementById('ticketsBought').textContent = stats.ticketsBought || 0;
+      document.getElementById('loggedInUsers').textContent = stats.loggedInUsers || 0;
+      document.getElementById('totalUsers').textContent = stats.totalUsers || 0;
+      
+      // Store stats for later use
+      window.dashboardStats = stats;
+    })
+    .catch(err => {
+      console.error('Error loading stats:', err);
+      showDashboardError('Failed to load dashboard statistics. Make sure admin_service.py is running.');
+    });
   
-  // Update stat cards
-  document.getElementById('totalEvents').textContent = dashboardData.totalEvents;
-  document.getElementById('totalRegistrations').textContent = dashboardData.totalRegistrations;
-  document.getElementById('activeEvents').textContent = dashboardData.activeEvents;
-  document.getElementById('ticketsBought').textContent = dashboardData.ticketsBought;
-  document.getElementById('loggedInUsers').textContent = dashboardData.loggedInUsers;
-  document.getElementById('totalUsers').textContent = dashboardData.totalUsers;
+  // Fetch event registrations
+  fetch('http://localhost:3003/dashboard/registrations-by-event')
+    .then(response => response.json())
+    .then(data => {
+      if (data.eventRegistrations) {
+        window.eventRegistrationData = data.eventRegistrations;
+      }
+    })
+    .catch(err => console.error('Error loading registrations by event:', err));
   
-  // Store for chart initialization
-  window.dashboardData = dashboardData;
+  // Fetch user distribution
+  fetch('http://localhost:3003/dashboard/user-distribution')
+    .then(response => response.json())
+    .then(data => {
+      if (data.userDistribution) {
+        window.userDistributionData = data.userDistribution;
+      }
+    })
+    .catch(err => console.error('Error loading user distribution:', err));
+  
+  // Fetch recent registrations
+  fetch('http://localhost:3003/dashboard/recent-registrations')
+    .then(response => response.json())
+    .then(data => {
+      if (data.recentRegistrations) {
+        updateRecentRegistrations(data.recentRegistrations);
+      }
+    })
+    .catch(err => console.error('Error loading recent registrations:', err));
+}
+
+// Update recent registrations list
+function updateRecentRegistrations(registrations) {
+  const recentList = document.querySelector('.recent-list');
+  if (!recentList) return;
+  
+  recentList.innerHTML = '';
+  
+  registrations.forEach(reg => {
+    const recentItem = document.createElement('div');
+    recentItem.className = 'recent-item';
+    
+    const badgeClass = reg.badge === 'verified' ? 'verified' : 'pending';
+    const badgeIcon = reg.badge === 'verified' ? 'fa-check' : 'fa-clock';
+    
+    recentItem.innerHTML = `
+      <div class="recent-avatar">${reg.initials}</div>
+      <div class="recent-info">
+        <p class="recent-name">${reg.name}</p>
+        <p class="recent-event">${reg.event}</p>
+      </div>
+      <p class="recent-time">Registered ${reg.time}</p>
+      <span class="badge ${badgeClass}"><i class="fas ${badgeIcon}"></i> ${reg.badge_text}</span>
+    `;
+    
+    recentList.appendChild(recentItem);
+  });
 }
 
 // Initialize charts
 function initializeCharts() {
-  if (!window.dashboardData) return;
-  
   // Registrations Chart
   const registrationsCtx = document.getElementById('registrationsChart');
   if (registrationsCtx) {
@@ -96,14 +142,22 @@ function initializeCharts() {
       registrationsChart.destroy();
     }
     
+    // Use real data if available, otherwise fallback to empty
+    let chartData = window.eventRegistrationData || [];
+    if (chartData.length === 0) {
+      chartData = [
+        { name: 'No data', registrations: 0, color: '#e5e7eb' }
+      ];
+    }
+    
     registrationsChart = new Chart(registrationsCtx, {
       type: 'bar',
       data: {
-        labels: window.dashboardData.eventRegistrations.map(e => e.name),
+        labels: chartData.map(e => e.name),
         datasets: [{
           label: 'Registrations',
-          data: window.dashboardData.eventRegistrations.map(e => e.registrations),
-          backgroundColor: window.dashboardData.eventRegistrations.map(e => e.color),
+          data: chartData.map(e => e.registrations),
+          backgroundColor: chartData.map(e => e.color),
           borderRadius: 8,
           borderSkipped: false,
           hoverBackgroundColor: '#6366f1'
@@ -133,7 +187,6 @@ function initializeCharts() {
         scales: {
           y: {
             beginAtZero: true,
-            max: 5,
             ticks: {
               stepSize: 1,
               font: {
@@ -169,15 +222,22 @@ function initializeCharts() {
       userDistributionChart.destroy();
     }
     
+    // Use real data if available
+    let distData = window.userDistributionData || {
+      registered: 0,
+      attended: 0,
+      pending: 0
+    };
+    
     userDistributionChart = new Chart(userDistributionCtx, {
       type: 'doughnut',
       data: {
         labels: ['Registered', 'Attended', 'Pending'],
         datasets: [{
           data: [
-            window.dashboardData.userDistribution.registered,
-            window.dashboardData.userDistribution.attended,
-            window.dashboardData.userDistribution.pending
+            distData.registered,
+            distData.attended,
+            distData.pending
           ],
           backgroundColor: [
             '#10b981',
@@ -199,7 +259,6 @@ function initializeCharts() {
               font: {
                 size: 12
               },
-              color: '#6b7280',
               padding: 15,
               usePointStyle: true,
               pointStyle: 'circle'

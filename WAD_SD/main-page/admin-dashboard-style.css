@@ -32,8 +32,7 @@ body {
 
 /* Admin Dashboard Layout */
 .admin-dashboard {
-  display: grid;
-  grid-template-columns: var(--sidebar-width) 1fr;
+  display: block;
   min-height: 100vh;
   background: var(--lighter);
 }
