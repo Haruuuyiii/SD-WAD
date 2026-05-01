@@ -8,9 +8,9 @@ app = Flask(__name__, static_folder="static")
 CORS(app)
 
 SERVICES = {
-    "auth":  "http://localhost:3000", 
-    "user":  "http://localhost:3002", 
-    "notif": "http://localhost:3004", 
+    "auth":  "http://localhost:3001",
+    "user":  "http://localhost:3002",
+    "notif": "http://localhost:3004",
 }
 
 rate_limit_store = {}
@@ -149,8 +149,8 @@ if __name__ == "__main__":
     print("  CozMoz API Gateway — http://localhost:3000")
     print("=" * 55)
     print("  Services expected at:")
-    print("    auth_service.py  → http://localhost:3000")
-    print("    user_service.py  → http://localhost:3000")
-    print("    notif_service.py → http://localhost:3000")
+    print("    auth_service.py  → http://localhost:3001")
+    print("    user_service.py  → http://localhost:3002")
+    print("    notif_service.py → http://localhost:3004")
     print("=" * 55)
     app.run(debug=True, port=3000)
