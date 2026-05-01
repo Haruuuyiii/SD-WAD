@@ -32,8 +32,14 @@ document.getElementById('adminLoginForm').addEventListener('submit', async (e) =
   }
   
   try {
-    // Try to login using the gateway service
-    const response = await fetch('http://localhost:3000/api/auth/login', {
+    // Add loading state
+    const loginBtn = document.querySelector('.login-btn');
+    const originalText = loginBtn.textContent;
+    loginBtn.textContent = 'Logging in...';
+    loginBtn.disabled = true;
+    
+    // Login using admin_service.py
+    const response = await fetch('http://localhost:3003/admin/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -52,19 +58,23 @@ document.getElementById('adminLoginForm').addEventListener('submit', async (e) =
       // Store admin token in localStorage
       localStorage.setItem('adminToken', data.token);
       localStorage.setItem('adminUsername', data.username);
+      localStorage.setItem('adminUserId', data.user_id);
       
       // Redirect to admin dashboard after 1.5 seconds
       setTimeout(() => {
         window.location.href = './admin-dashboard.html';
       }, 1500);
-    } else if (response.ok && data.role !== 'admin') {
-      showMessage('Access denied. Admin credentials required.', 'error');
     } else {
-      showMessage(data.error || 'Invalid credentials', 'error');
+      showMessage(data.error || 'Invalid admin credentials', 'error');
+      loginBtn.textContent = originalText;
+      loginBtn.disabled = false;
     }
   } catch (error) {
     console.error('Login error:', error);
-    showMessage('Cannot reach the authentication server. Start gateway.py or auth_service.py.', 'error');
+    showMessage('Cannot reach admin service. Make sure admin_service.py is running on port 3003.', 'error');
+    const loginBtn = document.querySelector('.login-btn');
+    loginBtn.textContent = 'Sign In';
+    loginBtn.disabled = false;
   }
 });
 

@@ -112,6 +112,17 @@ function updateRecentRegistrations(registrations) {
   
   recentList.innerHTML = '';
   
+  // Handle empty registrations
+  if (!registrations || registrations.length === 0) {
+    recentList.innerHTML = `
+      <div class="recent-item" style="text-align: center; padding: 20px; color: #9ca3af;">
+        <i class="fas fa-inbox" style="font-size: 32px; margin-bottom: 10px; display: block;"></i>
+        <p>No registrations yet</p>
+      </div>
+    `;
+    return;
+  }
+  
   registrations.forEach(reg => {
     const recentItem = document.createElement('div');
     recentItem.className = 'recent-item';
@@ -366,6 +377,7 @@ function logout() {
   if (confirm('Are you sure you want to logout?')) {
     localStorage.removeItem('adminToken');
     localStorage.removeItem('adminUsername');
+    localStorage.removeItem('adminUserId');
     window.location.href = './admin-login.html';
   }
 }
